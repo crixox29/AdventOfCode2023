@@ -16,20 +16,20 @@ with open(file_path,'r') as file:
                 number, color = cube.split()
                 data.append({'Game ID': game_id, 'Color': color, 'Number': int(number)})
 
-# Crear DataFrame
+# Create Df
 df = pd.DataFrame(data)
 print(df)
-# Establecer límites para cada color
+# Limits for colors
 limits = {'red': 12, 'green': 13, 'blue': 14}
 
-# Verificar cada juego
+# verify each game
 possible_games = []
 for game_id in df['Game ID'].unique():
     game_df = df[df['Game ID'] == game_id]
     if all(game_df[game_df['Color'] == color]['Number'].max() <= limit for color, limit in limits.items()):
         possible_games.append(game_id)
 
-# Sumar los ID de juegos posibles
+# Sum all possible Ids
 total_sum = sum(possible_games)
 
 print("Suma de los ID de juegos posibles:", total_sum)
